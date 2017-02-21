@@ -116,9 +116,10 @@ module.exports = function(grunt) {
       var requires = {};
       fileInfo.requires.forEach(function(require) {
         var file = defineMap[require];
-        if (file)
-          requires[defineMap[require]] = true;
-        else {
+        if (file){
+          if (file !== fileInfo.path)
+            requires[defineMap[require]] = true;
+        } else {
           warn('Definition for "'+require+'" was not found, but is required by "'+fileInfo.path+'".');
         }
       });
